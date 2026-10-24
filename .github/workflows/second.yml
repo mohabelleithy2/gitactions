@@ -12,12 +12,17 @@ jobs:
               run: echo "hello mohab"
             - name: list files
               run: ls
-            - name: read readme file
-              run: cat README.md
+            - name: create file
+              run: touch new.txt
             - name: multiple
               run: |
                 ls
                 cat README.md
+            - name: upload artifact
+              uses: actions/upload-artifact@v7
+              with:
+                name: uploaded-file
+                path: new.txt
 
     first-job:
       runs-on: ubuntu-24.04
@@ -28,3 +33,7 @@ jobs:
               run: |
                 chmod +x new.sh
                 ./new.sh
+            - name: download artifact
+              uses: actions/download-artifact@v8
+              with:
+                name: uploaded-file
