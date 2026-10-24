@@ -24,4 +24,6 @@ jobs:
             - name: checkout
               uses: actions/checkout@v7
             - name: executing shell
-              run: ./new.sh
+              run: |
+                chmod +x new.sh
+                ./new.sh
