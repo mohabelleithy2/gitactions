@@ -17,3 +17,11 @@ jobs:
               run: |
                 ls
                 cat README.md
+
+    first-job:
+      runs-on: ubuntu-24.04
+      steps:
+            - name: checkout
+              uses: actions/checkout@v7
+            - name: welcome message
+              run: echo "hello mohab"
