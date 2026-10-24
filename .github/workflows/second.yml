@@ -1,0 +1,19 @@
+name: first-workflow
+on: push
+
+jobs:
+    first-job:
+      runs-on: ubuntu-latest
+      steps:
+            - name: checkout
+              uses: actions/checkout@v7
+            - name: welcome message
+              run: echo "hello mohab"
+            - name: list files
+              run: ls
+            - name: read readme file
+              run: cat README.md
+            - name: multiple
+              run: |
+                ls
+                cat README.md
