@@ -13,4 +13,7 @@ jobs:
               run: ls
             - name: read readme file
               run: cat README.md
-            
+            - name: run multiple lines
+              run : |
+                ls
+                cat README.md
