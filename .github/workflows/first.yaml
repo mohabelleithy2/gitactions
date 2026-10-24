@@ -1,0 +1,11 @@
+name: first-workflow
+on: push
+
+jobs:
+    first-job:
+      runs-on: ubuntu-latest
+      steps:
+            - name: welcome message
+              run: echo "hello mohab"
+            - name: list files
+              run: ls
