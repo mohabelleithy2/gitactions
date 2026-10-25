@@ -1,0 +1,50 @@
+name: matrix-workflow
+on:
+  workflow_dispatch:
+env:
+    workflow_env: workflow
+jobs:
+    first-job:
+      strategy:
+        matrix:
+          os: [ubuntu-latest, ubuntu-20.04]
+      runs-on: ${{matrix.os}}
+      env:
+          first-job_env: job
+      steps:
+            - name: checkout
+              uses: actions/checkout@v7
+            - name: welcome message
+              env:
+                step_env: step
+              run: echo "hello mohab ${{env.workflow_env}}-${{env.first-job_env}}-${{env.step_env}}"
+            - name: list files
+              run: ls
+            - name: create file
+              run: echo "hello mohab repo variable = ${{vars.repo_env}} , and repo secret = ${{secrets.REPO_SECRET}}" > new.txt
+            - name: multiple
+              run: |
+                ls
+                cat README.md
+            - name: upload artifact
+              uses: actions/upload-artifact@v7
+              with:
+                name: uploaded-file
+                path: new.txt
+
+    second-job:
+      runs-on: ubuntu-24.04
+      needs: first-job
+      steps:
+            - name: checkout
+              uses: actions/checkout@v7
+            - name: executing shell
+              run: |
+                chmod +x new.sh
+                ./new.sh
+            - name: download artifact
+              uses: actions/download-artifact@v8
+              with:
+                name: uploaded-file
+            - name: read downloaded file
+              run: cat new.txt
