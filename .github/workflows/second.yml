@@ -13,7 +13,7 @@ jobs:
             - name: welcome message
               env:
                 step_env: step
-              run: echo "hello mohab ${{env.workflow_env}}-$first-job_env-${{env.step_env}}"
+              run: echo "hello mohab ${{env.workflow_env}}-${{env.first-job_env}}-${{env.step_env}}"
             - name: list files
               run: ls
             - name: create file
