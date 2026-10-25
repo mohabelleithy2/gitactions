@@ -1,14 +1,19 @@
 name: second-workflow
 on: push
-
+env:
+    workflow_env: workflow
 jobs:
-    second-job:
+    first-job:
       runs-on: ubuntu-latest
+      env:
+          first-job_env: job
       steps:
             - name: checkout
               uses: actions/checkout@v7
             - name: welcome message
-              run: echo "hello mohab"
+              env:
+                step_env: step
+              run: echo "hello mohab ${{env.workflow_env}}-$first-job_env-${{env.step_env}}"
             - name: list files
               run: ls
             - name: create file
@@ -23,9 +28,9 @@ jobs:
                 name: uploaded-file
                 path: new.txt
 
-    first-job:
+    second-job:
       runs-on: ubuntu-24.04
-      needs: second-job
+      needs: first-job
       steps:
             - name: checkout
               uses: actions/checkout@v7
