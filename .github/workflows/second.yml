@@ -17,7 +17,7 @@ jobs:
             - name: list files
               run: ls
             - name: create file
-              run: echo "hello mohab repo variable = ${{env.repo_env}} , and repo secret = ${{secrets.repo_env}}" > new.txt
+              run: echo "hello mohab repo variable = ${{vars.repo_env}} , and repo secret = ${{secrets.REPO_SECRET}}" > new.txt
             - name: multiple
               run: |
                 ls
